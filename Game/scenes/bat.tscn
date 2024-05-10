@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://ckddvyxgjev6m"]
+
+[ext_resource type="Script" path="res://scripts/bat.gd" id="1_hs5xu"]
+[ext_resource type="Texture2D" uid="uid://w3ht5x6hrjuh" path="res://assets/sprites/Bat/Idle/SimpleEnemies Bat_Idle Spritesheet.png" id="1_jd8c8"]
+[ext_resource type="PackedScene" uid="uid://bmf6i851tcgvo" path="res://scenes/killzone.tscn" id="2_0lgxx"]
+[ext_resource type="PackedScene" uid="uid://0uwuh14e4a42" path="res://scenes/los_cone.tscn" id="2_7grmc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eckme"]
+atlas = ExtResource("1_jd8c8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edvry"]
+atlas = ExtResource("1_jd8c8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8yvv"]
+atlas = ExtResource("1_jd8c8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnyus"]
+atlas = ExtResource("1_jd8c8")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qtuy1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eckme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edvry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8yvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnyus")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2vebd"]
+radius = 3.0
+
+[node name="bat" type="CharacterBody2D"]
+script = ExtResource("1_hs5xu")
+
+[node name="LOSCone" parent="." instance=ExtResource("2_7grmc")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qtuy1")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Killzone" parent="." instance=ExtResource("2_0lgxx")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("CircleShape2D_2vebd")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="ray_colliding" from="LOSCone" to="." method="_on_los_cone_ray_colliding"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
