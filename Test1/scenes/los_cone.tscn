@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://0uwuh14e4a42"]
+
+[ext_resource type="Script" path="res://scripts/LOSCone.gd" id="1_h8d4t"]
+
+[node name="LOSCone" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_h8d4t")
+
+[node name="LOSChecker" type="RayCast2D" parent="."]
+target_position = Vector2(0, 73)
+collision_mask = 3
+
+[node name="Line2D" type="Line2D" parent="LOSChecker"]
+points = PackedVector2Array(0, 0, 0, 29)
+default_color = Color(0, 1, 1, 1)
+
+[node name="RCone" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(100, -100, 100, 100, 0, 0)
+
+[node name="Line2D" type="Line2D" parent="RCone"]
+points = PackedVector2Array(0, 0, 7, 0)
+default_color = Color(0, 0, 1, 1)
+
+[node name="LCone" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1, -1, -1, 1, 0, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
