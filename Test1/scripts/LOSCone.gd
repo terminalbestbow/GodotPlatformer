@@ -11,18 +11,20 @@ var sight = 100
 var pos
 var Player
 var targetMask
+var rvectors
 
 signal ray_colliding
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rvectors = r_cone.polygon
 	ray.target_position = Vector2(0, 0)
-	var rvectors = r_cone.polygon
-	var lvectors = l_cone.polygon
 	line_2d.points = rvectors
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	rvectors = r_cone.polygon
+	line_2d.points = rvectors
 	ray.force_raycast_update()
 	if Player != null and inArea:
 		ray.target_position = Player.position - ray.global_position
@@ -47,3 +49,7 @@ func _on_body_exited(body):
 	print("Area left")
 	inArea = false
 
+func rotateRay(rotation):
+	for i in range(0, 2):
+		r_cone.polygon[i].x *= cos(rotation)
+		r_cone.polygon[i].y *= sin(rotation)

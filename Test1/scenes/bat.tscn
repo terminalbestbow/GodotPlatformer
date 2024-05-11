@@ -59,9 +59,13 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("CircleShape2D_2vebd")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="chaseTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
+[node name="lookTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="ray_colliding" from="LOSCone" to="." method="_on_los_cone_ray_colliding"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="chaseTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="lookTimer" to="." method="_on_look_timer_timeout"]

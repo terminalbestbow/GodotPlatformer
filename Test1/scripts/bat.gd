@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 @onready var cone = $LOSCone
-@onready var timer = $Timer
+@onready var timer = $chaseTimer
+@onready var anim = $AnimatedSprite2D
 
 var chasing = false
 var direction
@@ -32,3 +33,11 @@ func _on_los_cone_ray_colliding(pos):
 func _on_timer_timeout():
 	chasing = false
 	speed = 0.3
+
+
+func _on_look_timer_timeout():
+	if anim.flip_h:
+		anim.set_flip_h(false)
+	else:
+		anim.set_flip_h(true)
+	cone.rotateRay(PI)
