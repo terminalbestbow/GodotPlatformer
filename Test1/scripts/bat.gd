@@ -42,9 +42,5 @@ func _on_look_timer_timeout():
 			anim.set_flip_h(false)
 		else:
 			anim.set_flip_h(true)
-	if !firstturn:
 		cone.rotateRay(PI/2)
-	else:
-		cone.rotateRay(PI)
-		firstturn = false
 	

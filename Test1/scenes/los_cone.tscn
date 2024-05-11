@@ -15,7 +15,7 @@ points = PackedVector2Array(0, 0, 0, 117)
 default_color = Color(0, 1, 1, 1)
 
 [node name="RCone" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 100, -100, 100, 100)
+polygon = PackedVector2Array(0, 0, 100, 100, 100, -100)
 
 [node name="Line2D" type="Line2D" parent="RCone"]
 points = PackedVector2Array(0, 0, 55.9721, -0.565369, 99, -1)

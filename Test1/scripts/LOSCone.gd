@@ -57,3 +57,4 @@ func rotateRay(rotation):
 	rotation = -rotation
 	r_cone.polygon[i].x = r_cone.polygon[i].x * cos(rotation) - r_cone.polygon[i].y * sin(rotation)
 	r_cone.polygon[i].y = r_cone.polygon[i].x * sin(rotation) + r_cone.polygon[i].y * cos(rotation)
+	print("foo")
