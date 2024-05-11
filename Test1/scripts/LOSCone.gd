@@ -50,6 +50,10 @@ func _on_body_exited(body):
 	inArea = false
 
 func rotateRay(rotation):
-	for i in range(0, 2):
-		r_cone.polygon[i].x *= cos(rotation)
-		r_cone.polygon[i].y *= sin(rotation)
+	var i = 1
+	r_cone.polygon[i].x = r_cone.polygon[i].x * cos(rotation) - r_cone.polygon[i].y * sin(rotation)
+	r_cone.polygon[i].y = r_cone.polygon[i].x * sin(rotation) + r_cone.polygon[i].y * cos(rotation)
+	i = 2
+	rotation = -rotation
+	r_cone.polygon[i].x = r_cone.polygon[i].x * cos(rotation) - r_cone.polygon[i].y * sin(rotation)
+	r_cone.polygon[i].y = r_cone.polygon[i].x * sin(rotation) + r_cone.polygon[i].y * cos(rotation)

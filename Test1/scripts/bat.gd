@@ -8,6 +8,7 @@ var chasing = false
 var direction
 var startPos
 var speed = 1
+var firstturn = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	cone.sight = 1000
@@ -36,8 +37,14 @@ func _on_timer_timeout():
 
 
 func _on_look_timer_timeout():
-	if anim.flip_h:
-		anim.set_flip_h(false)
+	if !chasing:
+		if anim.flip_h:
+			anim.set_flip_h(false)
+		else:
+			anim.set_flip_h(true)
+	if !firstturn:
+		cone.rotateRay(PI/2)
 	else:
-		anim.set_flip_h(true)
-	cone.rotateRay(PI)
+		cone.rotateRay(PI)
+		firstturn = false
+	
